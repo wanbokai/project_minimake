@@ -1,29 +1,12 @@
 #include<stdio.h>
 #include<string.h>
-
-void print_help(){
-    printf("Usage:...\n");
-    printf("program  --help\n");
-    printf("program --version\n");
-    printf("program --where\n"); 
-}
-
-void print_version(){
-    printf("version(1.0.0)\n");
-}
-
-void print_where(){
-    printf("project_minimake\n");
-}
-
-void print_error(){
-    printf("unkown command\n");
-    printf("please input true command(--help)\n");
-}
+#include"make.h"
+#include"function_main.h"
 
 int main(int argc,char *argv[]){
     if(argc==1){
-        printf("error: lack of input!\n");
+        //printf("error: lack of input!\n");
+        preprocess_makefile(0);
         return 1;
     }
 
@@ -34,6 +17,8 @@ int main(int argc,char *argv[]){
             print_version();
         }else if(strcmp(argv[i],"--where")==0){
             print_where();
+        }else if(strcmp(argv[i],"--verbose")==0){
+            preprocess_makefile(1);
         }else{
             print_error();
         }

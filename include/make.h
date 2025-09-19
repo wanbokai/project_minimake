@@ -6,3 +6,7 @@ void rtrim(char *line);
 bool is_blank(const char *line);
 //去除注释
 void remove_comment(char *line);
+// 判断是否包含冒号
+bool is_target_line(const char *line);
+//判断是否以tab开头
+bool is_command_line(const char *line);

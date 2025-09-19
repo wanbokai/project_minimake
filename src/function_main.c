@@ -59,3 +59,31 @@ void preprocess_makefile(int verbose){
     if(out!=NULL)
     fclose(out);
 }
+
+void check_makefile(){
+    FILE *fp=fopen("./minimake_cleared.mk","r");
+    if(!fp){
+        perror("minimake_cleared can not open");
+        exit(1);
+    }
+
+    char line[MAXLINE];
+    int line_num=0;
+    int target=0;//判断是否已经出现目标行
+    
+    while(fgets(line,sizeof(line),fp)){
+        line_num++;
+
+        if(is_target_line(line)){
+            target=1;
+        }else if(is_command_line(line)){
+            if(target) continue;
+            else {printf("Line%d: Command found before rule\n",line_num);}
+        }else{
+             printf("Line%d: Missing colon in target definition\n", line_num);
+             break;
+        }
+
+        }
+        fclose(fp);
+    }
